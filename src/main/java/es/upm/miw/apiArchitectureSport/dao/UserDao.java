@@ -1,5 +1,7 @@
 package es.upm.miw.apiArchitectureSport.dao;
 
-public interface UserDao {
 
+import es.upm.miw.apiArchitectureSport.entities.User;
+
+public interface UserDao  extends GenericDao<User, String>{
 }

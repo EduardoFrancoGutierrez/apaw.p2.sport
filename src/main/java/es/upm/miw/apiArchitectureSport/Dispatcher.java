@@ -5,6 +5,7 @@ import es.upm.miw.apiArchitectureSport.api.UserResource;
 import es.upm.miw.apiArchitectureSport.api.UserSportResource;
 import es.upm.miw.apiArchitectureSport.expetions.InvalidNickException;
 import es.upm.miw.apiArchitectureSport.expetions.InvalidSportException;
+import es.upm.miw.apiArchitectureSport.expetions.InvalidUserSportException;
 import es.upm.miw.apiArchitectureSport.expetions.NotFoundSportException;
 import es.upm.miw.apiArchitectureTheme.exceptions.InvalidRequestException;
 import es.upm.miw.apiArchitectureTheme.exceptions.InvalidThemeFieldException;
@@ -50,15 +51,23 @@ public class Dispatcher {
             String nick = request.getBody().split(":")[0];
             String email = request.getBody().split(":")[1];
             try {
-                response.setBody(this.userResource.createUser(nick, email));
+                this.userResource.createUser(nick, email);
+                response.setStatus(HttpStatus.CREATED);
             } catch (InvalidNickException e) {
+                responseError(response, e);
+            }
+            catch (InvalidUserSportException e) {
                 responseError(response, e);
             }
             break;
         case "sports":
             try {
-                response.setBody(this.SportResource.createSport(request.getBody()));
+                this.SportResource.createSport(request.getBody());
+                response.setStatus(HttpStatus.CREATED);
             } catch (InvalidSportException e) {
+                responseError(response, e);
+            }
+            catch (InvalidUserSportException e) {
                 responseError(response, e);
             }
             break;
