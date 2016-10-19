@@ -1,10 +1,10 @@
 package es.upm.miw.apiArchitectureSport.dao.memory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import es.upm.miw.apiArchitectureSport.dao.UserSportDao;
-import es.upm.miw.apiArchitectureSport.entities.User;
 import es.upm.miw.apiArchitectureSport.entities.UserSport;
 
 
@@ -16,26 +16,25 @@ public class UserSportDaoMemory extends GenericDaoMemory<UserSport> implements U
     }
 
     @Override
-    public List<User> nickUsersBySport(String sport) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<String> nickUsersBySport(String sport) {
+        List<UserSport>  listUser=  this.findAll();
+        List<String> listUserDoSport= new ArrayList <String>();
+        for (UserSport user: listUser){
+            if (sport.equals(user.getNameSport()))
+                listUserDoSport.add(user.getNickUser());
+        }
+        return listUserDoSport;
     }
 
-    @Override
-    public Boolean addSportInUser(String nick, String sport) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+
 
     @Override
     protected String getId(UserSport entity) {
-        // TODO Auto-generated method stub
-        return null;
+        return entity.getNickUser()+":"+entity.getNameSport();
     }
 
     @Override
     protected void setId(UserSport entity, Integer id) {
-        // TODO Auto-generated method stub
         
     }
 

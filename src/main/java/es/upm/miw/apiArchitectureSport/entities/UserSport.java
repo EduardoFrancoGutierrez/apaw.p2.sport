@@ -5,7 +5,7 @@ public class UserSport {
 
     private String nameSport;
 
-    private int id;
+    private String id;
 
     public UserSport(String nickUser, String nameSport) {
         super();
@@ -29,11 +29,11 @@ public class UserSport {
         this.nameSport = nameSport;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

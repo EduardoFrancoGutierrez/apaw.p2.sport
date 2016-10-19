@@ -82,7 +82,8 @@ public class Dispatcher {
         if ("users".equals(request.paths()[0]) && "sport".equals(request.paths()[2])) {
             String nick = request.paths()[1];
             try {
-                response.setBody(this.userSportResource.addSportInUser(nick, request.getBody()));
+                this.userSportResource.addSportInUser(nick, request.getBody());
+                response.setStatus(HttpStatus.CREATED);
             } catch (NotFoundSportException e) {
                 responseError(response, e);
             }

@@ -42,7 +42,7 @@ public class ApiArchitectureMain {
         this.request();
         request.setBody("tenis");
         this.request();
-        request.setBody("ajegrez");
+        request.setBody("ajedrez");
         this.request();
         
         request.setMethod(HttpMethod.PUT);
