@@ -7,14 +7,13 @@ import es.upm.miw.apiArchitectureSport.entities.Sport;
 import es.upm.miw.apiArchitectureSport.entities.User;
 import es.upm.miw.apiArchitectureSport.entities.UserSport;
 import es.upm.miw.apiArchitectureSport.expetions.NotFoundSportException;
-import es.upm.miw.apiArchitectureTheme.exceptions.InvalidThemeFieldException;
 
 public class UserSportController {
 
-    public List<String> nickUsersBySport(String SportName) throws InvalidThemeFieldException{
+    public List<String> nickUsersBySport(String SportName) throws NotFoundSportException{
         Sport sport= DaoFactory.getFactory().getSportDao().read(SportName);
         if (sport==null)
-            throw new InvalidThemeFieldException("nickUsersBySport="+SportName);
+            throw new NotFoundSportException("nickUsersBySport="+SportName);
         else
         {
            return DaoFactory.getFactory().getUserSportDao().nickUsersBySport(SportName);
@@ -26,7 +25,7 @@ public class UserSportController {
             DaoFactory.getFactory().getUserSportDao().create(new UserSport(nick,sport));
         }
         else
-            throw new NotFoundSportException("addSportInUser="+nick+","+sport);
+            throw new NotFoundSportException("nick:"+nick+".sport:"+sport);
     }
     
     private Boolean validationAddSportInUser(String nick, String sportName ){

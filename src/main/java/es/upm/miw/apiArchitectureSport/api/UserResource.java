@@ -3,7 +3,6 @@ package es.upm.miw.apiArchitectureSport.api;
 import es.upm.miw.apiArchitectureSport.controller.UserController;
 import es.upm.miw.apiArchitectureSport.expetions.InvalidNickException;
 import es.upm.miw.apiArchitectureSport.expetions.InvalidUserSportException;
-import es.upm.miw.apiArchitectureTheme.exceptions.InvalidThemeFieldException;
 
 public class UserResource {
 
@@ -13,7 +12,7 @@ public class UserResource {
         new UserController().createUser(nick, email);
     }
     
-    public String allUsers() throws InvalidThemeFieldException{
+    public String allUsers() throws InvalidUserSportException{
         return new UserController().allUsers();
     }
     

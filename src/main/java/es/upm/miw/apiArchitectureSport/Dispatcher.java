@@ -4,11 +4,10 @@ import es.upm.miw.apiArchitectureSport.api.SportResource;
 import es.upm.miw.apiArchitectureSport.api.UserResource;
 import es.upm.miw.apiArchitectureSport.api.UserSportResource;
 import es.upm.miw.apiArchitectureSport.expetions.InvalidNickException;
+import es.upm.miw.apiArchitectureSport.expetions.InvalidRequestException;
 import es.upm.miw.apiArchitectureSport.expetions.InvalidSportException;
 import es.upm.miw.apiArchitectureSport.expetions.InvalidUserSportException;
 import es.upm.miw.apiArchitectureSport.expetions.NotFoundSportException;
-import es.upm.miw.apiArchitectureTheme.exceptions.InvalidRequestException;
-import es.upm.miw.apiArchitectureTheme.exceptions.InvalidThemeFieldException;
 import es.upm.miw.web.http.HttpRequest;
 import es.upm.miw.web.http.HttpResponse;
 import es.upm.miw.web.http.HttpStatus;
@@ -32,13 +31,13 @@ public class Dispatcher {
             String sport = request.paths()[1].split("=")[1];
             try {
                 response.setBody(this.userSportResource.nickUsersBySport(sport));
-            } catch (InvalidThemeFieldException e) {
+            } catch (NotFoundSportException e) {
                 responseError(response, e);
             }
         } else if ("users".equals(request.paths()[0])) {
             try {
                 response.setBody(this.userResource.allUsers());
-            } catch (InvalidThemeFieldException e) {
+            } catch (InvalidUserSportException e) {
                 responseError(response, e);
             }
         } else
